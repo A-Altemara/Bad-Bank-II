@@ -36,22 +36,20 @@ app.get('/account/login/:email/:password', function (req, res) {
 
 // deposit funds to an account
 app.get('/account/deposit/:email/:amount', function (req, res) {
-    throw new Error("Not Implemented");
-
-    res.send({
-        email: req.params.email,
-        amount: req.params.amount
-    });
+    dal.deposit(req.params.email, req.params.amount).
+        then((balance) => {
+            console.log("New Balance: " + balance);
+            res.send(balance);
+        });
 });
 
 // withdraw funds from an account
 app.get('/account/withdraw/:email/:amount', function (req, res) {
-    throw new Error("Not Implemented");
-
-    res.send({
-        email: req.params.email,
-        amount: req.params.amount
-    });
+    dal.withdraw(req.params.email, req.params.amount).
+        then((balance) => {
+            console.log("New Balance: " + balance);
+            res.send(balance);
+        });
 });
 
 // get the balance for an account
